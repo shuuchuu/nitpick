@@ -1,0 +1,57 @@
+[nitpick.files.absent]
+"mypy.ini" = "Replaced by a section in pyproject.toml"
+
+[[".gitignore".contains]]
+line = "__pycache__/"
+
+[[".gitignore".contains]]
+line = ".mypy_cache/"
+
+[[".gitignore".contains]]
+line = ".cache/"
+
+[[".gitignore".contains]]
+line = ".pytest_cache/"
+
+[[".gitignore".contains]]
+line = ".venv/"
+
+["pyproject.toml".tool.isort]
+profile = "black"
+
+[".pylintrc".MASTER]
+jobs = 0
+load-plugins = "pylint.extensions.docparams"
+
+[".pylintrc"."MESSAGES CONTROL"]
+disable = "all"
+enable = "missing-param-doc, differing-param-doc, differing-type-doc, missing-return-doc"
+
+["pyproject.toml".tool.mypy]
+disallow_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true
+
+["pyproject.toml".tool.poetry.dependencies]
+python = "^3.10"
+
+["pyproject.toml".tool.poetry.group.dev.dependencies]
+black = "*"
+flake8 = "*"
+isort = "*"
+mypy = "*"
+nitpick = "*"
+pylint = "*"
+
+[".flake8".flake8]
+exclude = "__pycache__, .git, .mypy_cache, .pytest_cache, .venv"
+max-line-length = 88
+per-file-ignores = "test/*: D"
+
+["pyproject.toml".build-system]
+build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
+
+["poetry.toml"]
+virtualenvs.create = true
+virtualenvs.in-project = true
